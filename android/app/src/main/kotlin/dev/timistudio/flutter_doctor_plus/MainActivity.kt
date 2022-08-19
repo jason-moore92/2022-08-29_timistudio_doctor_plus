@@ -1,4 +1,4 @@
-package com.example.flutter_doctor_plus
+package dev.timistudio.flutter_doctor_plus
 
 import io.flutter.embedding.android.FlutterActivity
 
