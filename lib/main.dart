@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'feature/account/bloc/dark_mode/bloc_dark_mode.dart';
 import 'feature/account/bloc/list_bank/bloc_list_bank.dart';
 import 'feature/my_work_health_guide/bloc/health_guide_created_me/list_created_me_bloc.dart';
@@ -30,6 +32,11 @@ import 'feature/onboarding/bloc/slider/bloc_slider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
+  }
+
   final MultiBlocProvider blocProvider = MultiBlocProvider(
     providers: [
       BlocProvider<SliderBloc>(
@@ -92,8 +99,7 @@ Future<void> main() async {
     ],
     child: EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('vi')],
-        path:
-            'assets/translations', // <-- change the path of the translation files
+        path: 'assets/translations', // <-- change the path of the translation files
         fallbackLocale: const Locale('en'),
         saveLocale: false,
         useOnlyLangCode: true,
@@ -102,8 +108,7 @@ Future<void> main() async {
   );
   await SentryFlutter.init(
     (options) {
-      options.dsn =
-          'https://91728898c9b24bdd990de8bb7733551c@o889705.ingest.sentry.io/6115169';
+      options.dsn = 'https://91728898c9b24bdd990de8bb7733551c@o889705.ingest.sentry.io/6115169';
       // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
       // We recommend adjusting this value in production.
       options.tracesSampleRate = 1.0;

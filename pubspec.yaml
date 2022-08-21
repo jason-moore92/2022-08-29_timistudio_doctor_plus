@@ -47,7 +47,8 @@ dependencies:
   sentry_flutter: ^6.9.1
   easy_localization: ^3.0.1
   country_picker: ^2.0.15
-  country_code_picker: ^2.0.2 # need to update/check 
+  # country_code_picker: ^2.0.2 # need to update/check 
+  fl_country_code_picker: ^0.0.2+1
   flutter_native_splash: ^2.2.7
   pinput: ^1.2.0 # need to update/check 
   table_calendar: ^3.0.6
