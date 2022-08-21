@@ -1,5 +1,6 @@
-import 'package:country_code_picker/country_code.dart';
-import 'package:country_code_picker/country_localizations.dart';
+// import 'package:country_code_picker/country_code.dart';
+// import 'package:country_code_picker/country_localizations.dart';
+import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_doctor_plus/common/constant/colors.dart';
 import 'package:flutter_doctor_plus/common/constant/styles.dart';
@@ -25,9 +26,8 @@ class SelectionCustom extends StatefulWidget {
     this.barrierColor,
     this.hideSearch = false,
     this.closeIcon,
-  })  : searchDecoration = searchDecoration.prefixIcon == null
-            ? searchDecoration.copyWith(prefixIcon: const Icon(Icons.search))
-            : searchDecoration,
+  })  : searchDecoration =
+            searchDecoration.prefixIcon == null ? searchDecoration.copyWith(prefixIcon: const Icon(Icons.search)) : searchDecoration,
         super(key: key);
   final List<CountryCode> elements;
   final bool? showCountryOnly;
@@ -75,8 +75,7 @@ class _SelectionCustomState extends State<SelectionCustom> {
           clipBehavior: Clip.hardEdge,
           padding: const EdgeInsets.symmetric(horizontal: 24),
           width: widget.size?.width ?? MediaQuery.of(context).size.width,
-          height:
-              widget.size?.height ?? MediaQuery.of(context).size.height * 0.85,
+          height: widget.size?.height ?? MediaQuery.of(context).size.height * 0.85,
           decoration: widget.boxDecoration ??
               const BoxDecoration(
                 color: grey100,
@@ -103,8 +102,7 @@ class _SelectionCustomState extends State<SelectionCustom> {
                             children: [
                               ...widget.favoriteElements.map(
                                 (f) => SimpleDialogOption(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 24),
+                                  padding: const EdgeInsets.symmetric(vertical: 24),
                                   child: _buildOption(f),
                                   onPressed: () {
                                     _selectItem(f);
@@ -145,17 +143,16 @@ class _SelectionCustomState extends State<SelectionCustom> {
               children: [
                 if (widget.showFlag!)
                   Container(
-                    margin: const EdgeInsets.only(right: 16.0),
-                    decoration: widget.flagDecoration,
-                    clipBehavior: widget.flagDecoration == null
-                        ? Clip.none
-                        : Clip.hardEdge,
-                    child: Image.asset(
-                      e.flagUri!,
-                      package: 'country_code_picker',
-                      width: widget.flagWidth,
-                    ),
-                  ),
+                      margin: const EdgeInsets.only(right: 16.0),
+                      decoration: widget.flagDecoration,
+                      clipBehavior: widget.flagDecoration == null ? Clip.none : Clip.hardEdge,
+                      child: e.flagImage
+                      // Image.asset(
+                      //   e.flagUri!,
+                      //   package: 'country_code_picker',
+                      //   width: widget.flagWidth,
+                      // ),
+                      ),
                 Text(
                   e.dialCode!,
                   overflow: TextOverflow.fade,
@@ -167,7 +164,8 @@ class _SelectionCustomState extends State<SelectionCustom> {
           Expanded(
             flex: 2,
             child: Text(
-              e.toCountryStringOnly(),
+              e.name,
+              // e.toCountryStringOnly(),
               overflow: TextOverflow.fade,
               style: h4(context: context),
             ),
@@ -182,10 +180,14 @@ class _SelectionCustomState extends State<SelectionCustom> {
       return widget.emptySearchBuilder!(context);
     }
 
-    return Center(
-      child: Text(CountryLocalizations.of(context)?.translate('no_country') ??
-          'No country found'),
+    return const Center(
+      child: const Text('No country found'),
     );
+
+    // return Center(
+    //   child: Text(CountryLocalizations.of(context)?.translate('no_country') ??
+    //       'No country found'),
+    // );
   }
 
   @override
@@ -197,12 +199,8 @@ class _SelectionCustomState extends State<SelectionCustom> {
   void _filterElements(String s) {
     s = s.toUpperCase();
     setState(() {
-      filteredElements = widget.elements
-          .where((e) =>
-              e.code!.contains(s) ||
-              e.dialCode!.contains(s) ||
-              e.name!.toUpperCase().contains(s))
-          .toList();
+      filteredElements =
+          widget.elements.where((e) => e.code!.contains(s) || e.dialCode!.contains(s) || e.name!.toUpperCase().contains(s)).toList();
     });
   }
 

@@ -14,11 +14,8 @@ class TextFieldPhone extends StatelessWidget {
   final FocusNode focusNode;
   final String labelText;
 
-  OutlineInputBorder createInputDecoration(BuildContext context,
-      {Color? color}) {
-    return OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: color ?? isabelline));
+  OutlineInputBorder createInputDecoration(BuildContext context, {Color? color}) {
+    return OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: color ?? isabelline));
   }
 
   @override
@@ -39,9 +36,7 @@ class TextFieldPhone extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 17),
               margin: const EdgeInsets.only(right: 8),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: const Border.fromBorderSide(
-                      BorderSide(color: isabelline))),
+                  borderRadius: BorderRadius.circular(12), border: const Border.fromBorderSide(BorderSide(color: isabelline))),
               child: CountryCodeCustom(
                 onChanged: (value) {},
                 builder: (value) {
@@ -49,12 +44,13 @@ class TextFieldPhone extends StatelessWidget {
                       width: 100,
                       child: Row(
                         children: [
-                          Image.asset(
-                            value!.flagUri!,
-                            package: 'country_code_picker',
-                            height: 16,
-                            width: 28,
-                          ),
+                          value!.flagImage,
+                          // Image.asset(
+                          //   value!.flagUri!,
+                          //   package: 'country_code_picker',
+                          //   height: 16,
+                          //   width: 28,
+                          // ),
                           const SizedBox(
                             width: 8,
                           ),
@@ -82,8 +78,7 @@ class TextFieldPhone extends StatelessWidget {
                   style: h4(context: context, fontWeight: '600'),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(12),
-                    focusedBorder:
-                        createInputDecoration(context, color: goGreen),
+                    focusedBorder: createInputDecoration(context, color: goGreen),
                     enabledBorder: createInputDecoration(context),
                   )),
             )
